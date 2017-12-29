@@ -6,8 +6,8 @@
                 <stop :offset="getFill" :stop-color="(rtl) ? activeColor : inactiveColor" />
             </linearGradient>
 
-            <path v-bind="pathAttrs" :d="pointsToString" :fill="getFillId" :stroke="borderColor" :stroke-width="borderWidth" vector-effect="non-scaling-stroke" />
-            <path  v-bind="pathAttrs" :d="pointsToString" :fill="getFillId" />
+            <path v-bind="pathAttrs" :d="pointsToString" :fill="getFillId" :stroke="borderColor" :stroke-width="getBorderWidth" />
+            <path v-bind="pathAttrs" :d="pointsToString" :fill="getFillId" />
         </svg>
     </div>
 </template>
@@ -18,6 +18,9 @@ import RatingItem from '../mixins/RatingItem.js'
 export default Vue.extend({
     mixins: [RatingItem],
     computed: {
+        getBorderWidth() {
+            return Math.round((this.originalWidth / this.getWidth) * this.borderWidth * 10) 
+        },
         getViewbox() {
             return '0 0 ' + this.originalWidth + ' ' + this.originalHeight
         },
